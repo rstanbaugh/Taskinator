@@ -1,10 +1,10 @@
 // variables declarations
 var formEl = document.querySelector("#task-form");
 var tasksToDoEl = document.querySelector("#tasks-to-do");
+var taskNameInput = document.querySelector("input[name='task-name']").value;
 
 
-
-
+// functions
 var createTaskHandler = function(event) {
   event.preventDefault();
   
@@ -13,6 +13,7 @@ var createTaskHandler = function(event) {
   listItemEl.textContent = "This is a new task";
   tasksToDoEl.appendChild(listItemEl);
 }
+
 
 
 
