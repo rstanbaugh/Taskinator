@@ -1,29 +1,45 @@
+// variable to form object
 var formEl = document.querySelector("#task-form"); 
+// variable to unorganized list pbject
 var tasksToDoEl = document.querySelector("#tasks-to-do"); 
 
-
-var createTaskHandler = function(event) { 
+// runs when button is pushed
+var taskFormHandler = function(event) { 
   event.preventDefault(); 
+  // var equal to value of input element
   var taskNameInput = document.querySelector("input[name='task-name']").value;
   var taskTypeInput = document.querySelector("select[name='task-type']").value;
-  // console.log(taskTypeInput);
 
-  // create list item
-  var listItemEl = document.createElement("li");
-  listItemEl.className = "task-item";
+  // package up data as an object
+  var taskDataObj = {
+    name: taskNameInput,
+    type: taskTypeInput
+  };
 
-  // create div to hold task info and add to list item
-  var taskInfoEl = document.createElement("div");
-  // give it a class name
-  taskInfoEl.className = "task-info";
-  // add HTML content to div
-  taskInfoEl.innerHTML = "<h3 class='task-name'>" + taskNameInput + "</h3><span class='task-type'>" + taskTypeInput + "</span>";
+  // send data as an object to createTaskList
+  createTaskEl(taskDataObj);
+  }
 
-  listItemEl.appendChild(taskInfoEl);
+  var createTaskEl = function(taskDataObj){
+    // create list item
+    var listItemEl = document.createElement("li");
+    listItemEl.className = "task-item";
 
-  // add entire list item to list
-  tasksToDoEl.appendChild(listItemEl);
+    // create div to hold task info and add to list item
+    var taskInfoEl = document.createElement("div");
+    // give it a class name
+    taskInfoEl.className = "task-info";
+    // add HTML content to div
+    taskInfoEl.innerHTML = "<h3 class='task-name'>" + 
+      taskDataObj.name + 
+      "</h3><span class='task-type'>" + 
+      taskDataObj.type + 
+      "</span>";
 
-  }; 
+    listItemEl.appendChild(taskInfoEl);
 
-  formEl.addEventListener("submit", createTaskHandler);
+    // add entire list item to list
+    tasksToDoEl.appendChild(listItemEl);
+  }
+
+  formEl.addEventListener("submit", taskFormHandler);
